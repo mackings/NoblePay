@@ -1,3 +1,5 @@
+import 'package:NoblePay/App/Auth/views/signin.dart';
+import 'package:NoblePay/App/widgets/navigator.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -81,11 +83,6 @@ ListTile(
   ),
 )
 
-
-
-
-                          
-
                         ]
                       );
                     },
@@ -122,7 +119,8 @@ ListTile(
                     children: [
                       TextButton(
                         onPressed: () {
-                          _carouselController.jumpToPage(slides.length - 1);
+                         // _carouselController.jumpToPage(slides.length - 1);
+                         Nav.push(context, Signin());
                         },
                         child: const Text(
                           "Skip",

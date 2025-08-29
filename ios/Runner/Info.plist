@@ -6,6 +6,8 @@
 		<true/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
+		<key>NSFaceIDUsageDescription</key>
+<string>We use Face ID / Touch ID to authenticate you quickly and securely</string>
 		<key>CFBundleDisplayName</key>
 		<string>Untitled</string>
 		<key>CFBundleExecutable</key>
