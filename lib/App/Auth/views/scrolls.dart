@@ -122,10 +122,7 @@ ListTile(
                          // _carouselController.jumpToPage(slides.length - 1);
                          Nav.push(context, Signin());
                         },
-                        child: const Text(
-                          "Skip",
-                          style: TextStyle(color: Colors.red, fontSize: 16),
-                        ),
+                        child: CustomText(title: "Skip", fontSize: 16, color: Colors.red),
                       ),
                       TextButton(
                         onPressed: () {
@@ -137,10 +134,7 @@ ListTile(
                         },
                         child: Row(
                           children: const [
-                            Text(
-                              "Next",
-                              style: TextStyle(color: Colors.red, fontSize: 16),
-                            ),
+                            CustomText(title: "Next", fontSize: 16, color: Colors.red),
                             SizedBox(width: 4),
                             Icon(
                               Icons.arrow_right_alt,
