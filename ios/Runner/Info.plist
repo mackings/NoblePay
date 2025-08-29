@@ -9,7 +9,7 @@
 		<key>NSFaceIDUsageDescription</key>
 <string>We use Face ID / Touch ID to authenticate you quickly and securely</string>
 		<key>CFBundleDisplayName</key>
-		<string>Untitled</string>
+	<string>NoblePay</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -17,7 +17,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>untitled</string>
+	<string>NoblePay</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>

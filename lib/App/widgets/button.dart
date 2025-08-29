@@ -49,7 +49,7 @@ class CustomButton extends StatelessWidget {
           text,
           style: GoogleFonts.nunitoSans(
             color: Colors.white,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.bold,
             fontSize: 21,
           ),
         ),

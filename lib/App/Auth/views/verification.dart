@@ -1,0 +1,97 @@
+import 'package:NoblePay/App/widgets/button.dart';
+import 'package:NoblePay/App/widgets/gradienttext.dart';
+import 'package:NoblePay/App/widgets/navigator.dart';
+import 'package:NoblePay/App/widgets/pinfields.dart';
+import 'package:NoblePay/App/widgets/text.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+
+
+class Verification extends StatefulWidget {
+  const Verification({super.key});
+
+  @override
+  State<Verification> createState() => _VerificationState();
+}
+
+class _VerificationState extends State<Verification> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          /// Background SVG
+          Positioned.fill(
+            child: SvgPicture.asset(
+              "assets/svg/ol1.svg",
+              fit: BoxFit.contain, // or BoxFit.contain if you want
+            ),
+          ),
+
+          /// Foreground Content
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
+                child: Column(
+                  children: [
+                    GradientText(text: "Verification", fontSize: 30),
+
+                    CustomText(
+                      title: "Enter your code below",
+                      fontSize: 18,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    const SizedBox(height: 20),
+
+                    PinCodeInput(
+                      onCompleted: (pin) {
+                        print("Entered PIN: $pin");
+                      },
+                    ),
+
+                    const SizedBox(height: 380),
+
+                    // Already registered text
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(fontSize: 14, color: Colors.grey[700]),
+                          children: [
+                            const TextSpan(text: "Didn't receive the OTP? "),
+                            TextSpan(
+                              text: "Resend",
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Handle resend logic
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    CustomButton(
+                      text: "Verify Now",
+                      onPressed: () {
+                        Nav.push(context, const Verification());
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

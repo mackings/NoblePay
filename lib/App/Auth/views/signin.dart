@@ -1,8 +1,10 @@
 
 
+import 'package:NoblePay/App/Auth/views/signup_one.dart';
 import 'package:NoblePay/App/widgets/button.dart';
 import 'package:NoblePay/App/widgets/formfield.dart';
 import 'package:NoblePay/App/widgets/gradienttext.dart';
+import 'package:NoblePay/App/widgets/navigator.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -169,7 +171,11 @@ if (_authStatus.isNotEmpty)
                 ),
                 const SizedBox(height: 40),
 
-                Center(child: GradientText(text: "Sign Up", fontSize: 29)),
+                GestureDetector(
+                  onTap: () {
+                    Nav.push(context, Signup_one());
+                  },
+                  child: Center(child: GradientText(text: "Sign Up", fontSize: 26))),
                 const SizedBox(height: 8),
 
                 Center(
