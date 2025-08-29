@@ -6,6 +6,7 @@ import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -55,27 +56,31 @@ class _VerificationState extends State<Verification> {
                     const SizedBox(height: 380),
 
                     // Already registered text
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                          children: [
-                            const TextSpan(text: "Didn't receive the OTP? "),
-                            TextSpan(
-                              text: "Resend",
-                              style: const TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  // Handle resend logic
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+
+Center(
+  child: RichText(
+    text: TextSpan(
+      style: GoogleFonts.nunito(
+        fontSize: 14,
+        color: Colors.grey[700],
+      ),
+      children: [
+        TextSpan(text: "Didn't receive the OTP? "),
+        TextSpan(
+          text: "Resend",
+          style: GoogleFonts.nunito(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              // Handle resend logic
+            },
+        ),
+      ],
+    ),
+  ),
+),
 
                     const SizedBox(height: 10),
 

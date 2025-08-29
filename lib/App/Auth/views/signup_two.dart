@@ -6,6 +6,7 @@ import 'package:NoblePay/App/widgets/navigator.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Signup_two extends StatefulWidget {
   const Signup_two({super.key});
@@ -27,17 +28,17 @@ class _Signup_twoState extends State<Signup_two> {
               children: [
 
                 // Step indicator at top right
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "Step 2 of 2",
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+Align(
+  alignment: Alignment.topRight,
+  child: Text(
+    "Step 2 of 2",
+    style: GoogleFonts.nunito(
+      color: Colors.red,
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+),
 
                 const SizedBox(height: 40),
 
@@ -112,27 +113,36 @@ class _Signup_twoState extends State<Signup_two> {
                                  const SizedBox(height: 30),
 
                 // Already registered text
-                Center(
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(fontSize: 14, color: Colors.grey[700]),
-                      children: [
-                        const TextSpan(text: "Already registered? "),
-                        TextSpan(
-                          text: "Login",
-                          style: const TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              // Navigate to login screen
-                            },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+Center(
+  child: RichText(
+    text: TextSpan(
+      style: GoogleFonts.nunito(
+        fontSize: 14,
+        color: Colors.grey[700],
+      ),
+      children: [
+        TextSpan(
+          text: "Already registered? ",
+          style: GoogleFonts.nunito(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        TextSpan(
+          text: "Login",
+          style: GoogleFonts.nunito(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+          recognizer: TapGestureRecognizer()
+            ..onTap = () {
+              // Navigate to login screen
+            },
+        ),
+      ],
+    ),
+  ),
+),
 
 
 const SizedBox(height: 10),

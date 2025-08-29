@@ -8,6 +8,7 @@ import 'package:NoblePay/App/widgets/navigator.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 
 
@@ -109,10 +110,7 @@ class _SigninState extends State<Signin> {
                     onPressed: () {
                       // Navigate to forgot password screen
                     },
-                    child: const Text(
-                      "Forgot Password?",
-                      style: TextStyle(color: Colors.red, fontSize: 14),
-                    ),
+                    child: CustomText(title: "Forgot Password?", fontSize: 14, color: Colors.redAccent)
                   ),
                 ),
 
@@ -178,16 +176,16 @@ if (_authStatus.isNotEmpty)
                   child: Center(child: GradientText(text: "Sign Up", fontSize: 26))),
                 const SizedBox(height: 8),
 
-                Center(
-                  child: Text(
-                    "By using this app you agree with our Terms of Use and Privacy Policy.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                ),
+Center(
+  child: Text(
+    "By using this app you agree with our Terms of Use and Privacy Policy.",
+    textAlign: TextAlign.center,
+    style: GoogleFonts.nunito(
+      fontSize: 13,
+      color: Colors.grey[700],
+    ),
+  ),
+),
               ],
             ),
           ),
