@@ -12,6 +12,9 @@ class Scrolls extends StatefulWidget {
   State<Scrolls> createState() => _ScrollsState();
 }
 
+
+
+
 class _ScrollsState extends State<Scrolls> {
   final CarouselSliderController _carouselController =
       CarouselSliderController();
