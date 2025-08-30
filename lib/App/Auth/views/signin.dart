@@ -1,6 +1,7 @@
 
 
 import 'package:NoblePay/App/Auth/views/signup_one.dart';
+import 'package:NoblePay/App/Home/Views/mainhome.dart';
 import 'package:NoblePay/App/widgets/button.dart';
 import 'package:NoblePay/App/widgets/formfield.dart';
 import 'package:NoblePay/App/widgets/gradienttext.dart';
@@ -164,7 +165,8 @@ if (_authStatus.isNotEmpty)
                 CustomButton(
                   text: "Sign In", 
                   onPressed: () {
-                    // Normal login
+                    
+                    Nav.push(context, MainHome());
                   },
                 ),
                 const SizedBox(height: 40),
