@@ -107,7 +107,7 @@ class _TransactionBoxState extends State<TransactionBox> {
                         const SizedBox(height: 6),
                         CustomText(
                           title: item.label,
-                          fontSize: 11,
+                          fontSize: 10,
                           fontWeight: FontWeight.w600,
                           //align: TextAlign.center,
                         ),
