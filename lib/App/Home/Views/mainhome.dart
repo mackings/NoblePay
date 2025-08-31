@@ -67,7 +67,7 @@ Container(
   ),
   child: ClipOval(
     child: SvgPicture.asset(
-      'assets/svg/avatar.svg', // your SVG file
+      'assets/svg/icons/BG.svg', // your SVG file
       fit: BoxFit.cover,
     ),
   ),

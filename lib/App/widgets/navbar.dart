@@ -14,69 +14,78 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        // Background bar
-        Container(
-          height: 70,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 8,
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              navItem(Icons.home, "Home", 0),
-              navItem(Icons.chat, "Chat", 1),
-              SizedBox(width: 60), // space for the big middle QR button
-              navItem(Icons.credit_card, "Card", 3),
-              navItem(Icons.settings, "Settings", 4),
-            ],
-          ),
-        ),
-
-        // Middle big circle button (QR)
-        Positioned(
-          bottom: 0,
-          child: GestureDetector(
-            onTap: () => onTap(2),
+    return SizedBox(
+      height: 90, // increase height to allow QR button to float
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        clipBehavior: Clip.none, // allow drawing outside
+        children: [
+          // Background bar
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
             child: Container(
-              width: 70,
               height: 70,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [Color(0xFFCC204A), Color(0xFFFD4E25)], // always gradient
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(0, 3),
+                    color: Colors.black12,
+                    blurRadius: 8,
                   ),
                 ],
               ),
-              child: Center(
-                child: SvgPicture.asset(
-  'assets/svg/icons/qr.svg',
-  width: 32,
-  height: 32,
-  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-)
-
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  navItem(Icons.home, "Home", 0),
+                  navItem(Icons.chat, "Chat", 1),
+                  SizedBox(width: 60), // space for QR button
+                  navItem(Icons.credit_card, "Card", 3),
+                  navItem(Icons.settings, "Settings", 4),
+                ],
               ),
             ),
           ),
-        ),
-      ],
+
+          // Middle big QR button
+          Positioned(
+            bottom: 20, // floating above nav bar
+            child: GestureDetector(
+              onTap: () => onTap(2),
+              child: Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Color(0xFFCC204A), Color(0xFFFD4E25)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 6,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/svg/icons/qr.svg',
+                    width: 32,
+                    height: 32,
+                    colorFilter: ColorFilter.mode(
+                        Colors.white, BlendMode.srcIn),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -91,9 +100,7 @@ class CustomBottomNavBar extends StatelessWidget {
           Icon(
             icon,
             size: 28,
-            color: isActive
-                ? Color(0xFFCC204A) // your gradient main color for active
-                : Colors.grey,       // inactive color
+            color: isActive ? Color(0xFFCC204A) : Colors.grey,
           ),
           SizedBox(height: 4),
           CustomText(
@@ -107,4 +114,3 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 }
-
