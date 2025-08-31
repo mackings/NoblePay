@@ -57,6 +57,8 @@ CustomText(title: "Mac kingsley!",color: Colors.white,)
         ],
       ),
 
+
+
       // User avatar
 Container(
   width: 48, // diameter = 2 * radius
