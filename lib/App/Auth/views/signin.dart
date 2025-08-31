@@ -1,5 +1,4 @@
-
-
+import 'package:NoblePay/App/Auth/views/forgetpassword.dart';
 import 'package:NoblePay/App/Auth/views/signup_one.dart';
 import 'package:NoblePay/App/Home/Views/entry.dart';
 import 'package:NoblePay/App/Home/Views/mainhome.dart';
@@ -12,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
-
-
 
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
@@ -80,7 +77,10 @@ class _SigninState extends State<Signin> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 20.0,
+            ),
             child: Column(
               children: [
                 GradientText(text: "Sign In", fontSize: 39),
@@ -92,14 +92,14 @@ class _SigninState extends State<Signin> {
                 const SizedBox(height: 30),
 
                 CustomTextFormField(
-                  title: 'Email', 
+                  title: 'Email',
                   hintText: "Enter your email",
                   controller: emailController,
                 ),
                 const SizedBox(height: 20),
 
                 CustomTextFormField(
-                  title: 'Password', 
+                  title: 'Password',
                   hintText: "Enter your password",
                   controller: passwordController,
                   isPassword: true,
@@ -110,63 +110,67 @@ class _SigninState extends State<Signin> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // Navigate to forgot password screen
+                      Nav.push(context, Forgetpassword());
                     },
-                    child: CustomText(title: "Forgot Password?", fontSize: 14, color: Colors.redAccent)
+                    child: CustomText(
+                      title: "Forgot Password?",
+                      fontSize: 14,
+                      color: Colors.redAccent,
+                    ),
                   ),
                 ),
 
                 const SizedBox(height: 80),
 
                 // Fingerprint icon button
-GestureDetector(
-  onTap: _isAuthenticating ? null : _authenticateWithBiometrics,
-  child: Container(
-    width: 60,
-    height: 60,
-    decoration: BoxDecoration(
-      color: Colors.redAccent,
-      shape: BoxShape.circle,
-      boxShadow: [
-        BoxShadow(
-          color: Colors.red.withOpacity(0.5),
-          blurRadius: 6,
-          offset: const Offset(0, 3),
-        ),
-      ],
-    ),
-    child: _isAuthenticating
-        ? const CircularProgressIndicator(
-            color: Colors.white,
-            strokeWidth: 2,
-          )
-        : const Icon(
-            Icons.fingerprint,
-            color: Colors.white,
-            size: 32,
-          ),
-  ),
-),
+                GestureDetector(
+                  onTap: _isAuthenticating ? null : _authenticateWithBiometrics,
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.red.withOpacity(0.5),
+                          blurRadius: 6,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: _isAuthenticating
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          )
+                        : const Icon(
+                            Icons.fingerprint,
+                            color: Colors.white,
+                            size: 32,
+                          ),
+                  ),
+                ),
 
-const SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-// Authentication status text
-if (_authStatus.isNotEmpty)
-  Text(
-    _authStatus,
-    style: TextStyle(
-      color: _authStatus.contains('Successful') ? Colors.green : Colors.red,
-      fontSize: 14,
-    ),
-  ),
+                // Authentication status text
+                if (_authStatus.isNotEmpty)
+                  Text(
+                    _authStatus,
+                    style: TextStyle(
+                      color: _authStatus.contains('Successful')
+                          ? Colors.green
+                          : Colors.red,
+                      fontSize: 14,
+                    ),
+                  ),
 
-   const SizedBox(height: 40),
-
+                const SizedBox(height: 40),
 
                 CustomButton(
-                  text: "Sign In", 
+                  text: "Sign In",
                   onPressed: () {
-                    
                     Nav.push(context, HomePage());
                   },
                 ),
@@ -176,19 +180,22 @@ if (_authStatus.isNotEmpty)
                   onTap: () {
                     Nav.push(context, Signup_one());
                   },
-                  child: Center(child: GradientText(text: "Sign Up", fontSize: 26))),
+                  child: Center(
+                    child: GradientText(text: "Sign Up", fontSize: 26),
+                  ),
+                ),
                 const SizedBox(height: 8),
 
-Center(
-  child: Text(
-    "By using this app you agree with our Terms of Use and Privacy Policy.",
-    textAlign: TextAlign.center,
-    style: GoogleFonts.nunito(
-      fontSize: 13,
-      color: Colors.grey[700],
-    ),
-  ),
-),
+                Center(
+                  child: Text(
+                    "By using this app you agree with our Terms of Use and Privacy Policy.",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.nunito(
+                      fontSize: 13,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
