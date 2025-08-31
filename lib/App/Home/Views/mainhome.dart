@@ -1,8 +1,10 @@
 import 'package:NoblePay/App/widgets/menubox.dart';
-import 'package:NoblePay/App/widgets/navbar.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+
+
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
@@ -15,22 +17,12 @@ class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
 
-    int selectedIndex = 0;
-
-  final List<Widget> pages = [
-    Center(child: Text("Home Page")),
-    Center(child: Text("Chat Page")),
-    Center(child: Text("QR Page")),
-    Center(child: Text("Card Page")),
-    Center(child: Text("Settings Page")),
-  ];
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Stack for background + welcome text
+              
               Stack(
                 children: [
                   SvgPicture.asset(
@@ -42,36 +34,32 @@ class _MainHomeState extends State<MainHome> {
 Positioned(
   top: 60,
   left: 20,
-  right: 20, // ensures Row takes full width
+  right: 20, 
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      // Welcome + username
+      
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 CustomText(title: "Welcome",color: Colors.white,fontWeight: FontWeight.w300,),
-          SizedBox(height: 4), // small spacing
+          SizedBox(height: 4), 
 CustomText(title: "Mac kingsley!",color: Colors.white,)
         ],
       ),
 
 
-
-      // User avatar
 Container(
-  width: 48, // diameter = 2 * radius
+  width: 48, 
   height: 48,
   decoration: BoxDecoration(
     shape: BoxShape.circle,
-    color: Colors.transparent, // optional background
+    color: Colors.transparent, 
   ),
-  child: ClipOval(
-    child: SvgPicture.asset(
-      'assets/svg/icons/BG.svg', // your SVG file
-      fit: BoxFit.cover,
-    ),
+  child: Image.asset(
+    'assets/png/BGimg.png', 
+    fit: BoxFit.cover,
   ),
 ),
 
@@ -82,9 +70,10 @@ Container(
                 ],
               ),
 
-              // Transaction box floating over SVG
+
+
               Transform.translate(
-                offset: Offset(0, -60), // lifts the box up over the SVG
+                offset: Offset(0, -60), 
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: TransactionBox(
@@ -135,6 +124,8 @@ Container(
                   ),
                 ),
               ),
+
+
             ],
           ),
         ),
@@ -144,4 +135,5 @@ Container(
     );
   }
 }
+
 
