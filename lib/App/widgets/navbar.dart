@@ -1,6 +1,10 @@
+import 'package:NoblePay/App/Home/Views/scanqr.dart';
+import 'package:NoblePay/App/widgets/navigator.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -29,12 +33,7 @@ class CustomBottomNavBar extends StatelessWidget {
               height: 70,
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                  ),
-                ],
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)],
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -72,13 +71,20 @@ class CustomBottomNavBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    'assets/svg/icons/qr.svg',
-                    width: 32,
-                    height: 32,
-                    colorFilter: ColorFilter.mode(
-                        Colors.white, BlendMode.srcIn),
+                child: GestureDetector(
+                  onTap: () {
+                    Nav.push(context, Scanqr());
+                  },
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/svg/icons/qr.svg',
+                      width: 32,
+                      height: 32,
+                      colorFilter: ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ),
                 ),
               ),
