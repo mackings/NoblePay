@@ -17,7 +17,7 @@ class Scanqr extends StatefulWidget {
 
 class _ScanqrState extends State<Scanqr> {
   String? scannedResult;
-  bool isScanning = false; // ✅ Toggle between UI and scanner
+  bool isScanning = false;
   final MobileScannerController cameraController = MobileScannerController();
 
   @override

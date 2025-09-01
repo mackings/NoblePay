@@ -7,9 +7,18 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>NSFaceIDUsageDescription</key>
-<string>We use Face ID / Touch ID to authenticate you quickly and securely</string>
+		<string>We use Face ID / Touch ID to authenticate you quickly and securely</string>
+
+		<!-- ✅ Add permissions -->
+		<key>NSCameraUsageDescription</key>
+		<string>This app needs camera access to scan QR codes</string>
+
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app needs photos access to get QR code from photo library</string>
+		<!-- ✅ End permissions -->
+
 		<key>CFBundleDisplayName</key>
-	<string>NoblePay</string>
+		<string>NoblePay</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -17,7 +26,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-	<string>NoblePay</string>
+		<string>NoblePay</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
