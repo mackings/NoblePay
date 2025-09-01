@@ -112,7 +112,7 @@ class _ScanqrState extends State<Scanqr> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 150),
+                      const SizedBox(height: 120),
 
                       SvgPicture.asset(
                         "assets/svg/icons/qr.svg",

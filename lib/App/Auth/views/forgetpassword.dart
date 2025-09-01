@@ -56,7 +56,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                     hintText: "Mackingsley@gmail.com",
                   ),
 
-                  const SizedBox(height: 230),
+                  const SizedBox(height: 200),
 
                   CustomButton(
                     text: "Continue",

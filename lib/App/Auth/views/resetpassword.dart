@@ -53,7 +53,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     isPassword: true,
                   ),
 
-                  const SizedBox(height: 290),
+                  const SizedBox(height: 260),
 
                   CustomButton(
                     text: "Continue",
