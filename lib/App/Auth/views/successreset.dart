@@ -1,7 +1,7 @@
-import 'package:NoblePay/App/Auth/views/signin.dart';
-import 'package:NoblePay/App/widgets/Dialogs/successdialog.dart';
-import 'package:NoblePay/App/widgets/navigator.dart';
-import 'package:NoblePay/App/widgets/pagewrapper.dart';
+import 'package:noblepay/App/Auth/views/signin.dart';
+import 'package:noblepay/App/widgets/Dialogs/successdialog.dart';
+import 'package:noblepay/App/widgets/navigator.dart';
+import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

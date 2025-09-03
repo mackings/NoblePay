@@ -1,7 +1,7 @@
-import 'package:NoblePay/App/Auth/views/signin.dart';
-import 'package:NoblePay/App/widgets/navigator.dart';
-import 'package:NoblePay/App/widgets/pagewrapper.dart';
-import 'package:NoblePay/App/widgets/text.dart';
+import 'package:noblepay/App/Auth/views/signin.dart';
+import 'package:noblepay/App/widgets/navigator.dart';
+import 'package:noblepay/App/widgets/pagewrapper.dart';
+import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,13 +24,13 @@ class _ScrollsState extends State<Scrolls> {
       "image": "assets/svg/card.svg",
       "title": "Send\nMoney",
       "subtitle":
-          "Send Money safely, affordably, and instantly to your loved ones, friends, and family in Liberia using NoblePay.",
+          "Send Money safely, affordably, and instantly to your loved ones, friends, and family in Liberia using noblepay.",
     },
     {
       "image": "assets/svg/merchant.svg",
       "title": "Merchant\nPay",
       "subtitle":
-          "No more double charges, Merchant Pay is everything you need to safely, instantly, and conveniently pay for goods and services in Liberia using NoblePay.",
+          "No more double charges, Merchant Pay is everything you need to safely, instantly, and conveniently pay for goods and services in Liberia using noblepay.",
     },
     {
       "image": "assets/svg/utility.svg",

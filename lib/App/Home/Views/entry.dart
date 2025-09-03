@@ -1,6 +1,6 @@
-import 'package:NoblePay/App/Home/Views/mainhome.dart';
-import 'package:NoblePay/App/widgets/navbar.dart';
-import 'package:NoblePay/App/widgets/pagewrapper.dart';
+import 'package:noblepay/App/Home/Views/mainhome.dart';
+import 'package:noblepay/App/widgets/navbar.dart';
+import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:flutter/material.dart';
 
 

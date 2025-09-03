@@ -1,4 +1,4 @@
-import 'package:NoblePay/App/widgets/text.dart';
+import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class OrDivider extends StatelessWidget {

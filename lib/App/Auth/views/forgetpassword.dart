@@ -1,11 +1,11 @@
-import 'package:NoblePay/App/Auth/views/verifyreset.dart';
-import 'package:NoblePay/App/widgets/Ordivider.dart';
-import 'package:NoblePay/App/widgets/button.dart';
-import 'package:NoblePay/App/widgets/formfield.dart';
-import 'package:NoblePay/App/widgets/gradienttext.dart';
-import 'package:NoblePay/App/widgets/navigator.dart';
-import 'package:NoblePay/App/widgets/pagewrapper.dart';
-import 'package:NoblePay/App/widgets/text.dart';
+import 'package:noblepay/App/Auth/views/verifyreset.dart';
+import 'package:noblepay/App/widgets/Ordivider.dart';
+import 'package:noblepay/App/widgets/button.dart';
+import 'package:noblepay/App/widgets/formfield.dart';
+import 'package:noblepay/App/widgets/gradienttext.dart';
+import 'package:noblepay/App/widgets/navigator.dart';
+import 'package:noblepay/App/widgets/pagewrapper.dart';
+import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class Forgetpassword extends StatefulWidget {

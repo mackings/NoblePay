@@ -1,9 +1,9 @@
-import 'package:NoblePay/App/widgets/button.dart';
-import 'package:NoblePay/App/widgets/gradienttext.dart';
-import 'package:NoblePay/App/widgets/navigator.dart';
-import 'package:NoblePay/App/widgets/pagewrapper.dart';
-import 'package:NoblePay/App/widgets/pinfields.dart';
-import 'package:NoblePay/App/widgets/text.dart';
+import 'package:noblepay/App/widgets/button.dart';
+import 'package:noblepay/App/widgets/gradienttext.dart';
+import 'package:noblepay/App/widgets/navigator.dart';
+import 'package:noblepay/App/widgets/pagewrapper.dart';
+import 'package:noblepay/App/widgets/pinfields.dart';
+import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
