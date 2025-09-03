@@ -31,43 +31,43 @@ class _ForgetpasswordState extends State<Forgetpassword> {
               child: Column(
                 children: [
                   const GradientText(text: "Forget Password"),
-        
+
                   const CustomText(
                     title:
                         "Enter your phone number or email account to reset password",
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
                   ),
-        
+
                   const SizedBox(height: 30),
-        
+
                   const CustomTextFormField(
                     title: "Phone number",
                     hintText: "Enter your phone number",
                   ),
-        
+
                   const SizedBox(height: 30),
-        
+
                   const OrDivider(),
-        
+
                   const SizedBox(height: 30),
-        
+
                   const CustomTextFormField(
                     title: "Email address",
                     hintText: "Mackingsley@gmail.com",
                   ),
-        
+
                   const SizedBox(height: 200),
-        
+
                   CustomButton(
                     text: "Continue",
                     onPressed: () {
                       Nav.push(context, VerifyReset());
                     },
                   ),
-        
+
                   const SizedBox(height: 30),
-        
+
                   CustomButton(
                     text: "Cancel",
                     outlined: true,

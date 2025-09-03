@@ -3,8 +3,6 @@ import 'package:noblepay/App/widgets/navbar.dart';
 import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:flutter/material.dart';
 
-
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();

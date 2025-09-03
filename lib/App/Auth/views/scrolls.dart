@@ -13,7 +13,6 @@ class Scrolls extends StatefulWidget {
   State<Scrolls> createState() => _ScrollsState();
 }
 
-
 class _ScrollsState extends State<Scrolls> {
   final CarouselSliderController _carouselController =
       CarouselSliderController();
@@ -66,7 +65,7 @@ class _ScrollsState extends State<Scrolls> {
                           height: 290,
                         ),
                         const SizedBox(height: 20),
-          
+
                         ListTile(
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 39,

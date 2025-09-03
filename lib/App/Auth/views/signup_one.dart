@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:noblepay/App/Auth/views/signin.dart';
 import 'package:noblepay/App/Auth/views/signup_two.dart';
 import 'package:noblepay/App/widgets/button.dart';
 import 'package:noblepay/App/widgets/formfield.dart';
@@ -9,9 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
-
 class Signup_one extends StatefulWidget {
   const Signup_one({super.key});
 
@@ -20,6 +19,9 @@ class Signup_one extends StatefulWidget {
 }
 
 class _Signup_oneState extends State<Signup_one> {
+  TextEditingController Fullname = TextEditingController();
+  TextEditingController dob = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,84 +29,95 @@ class _Signup_oneState extends State<Signup_one> {
       body: PageWrapper(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
-            child: Column(
-            
-              children: [
-        
-        Align(
-          alignment: Alignment.topRight,
-          child: Text(
-            "Step 1 of 2",
-            style: GoogleFonts.nunito(
-              color: Colors.red,
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 50.0,
             ),
-          ),
-        ),
-        
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    "Step 1 of 2",
+                    style: GoogleFonts.nunito(
+                      color: Colors.red,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 40),
-        
+
                 GradientText(text: "Sign up", fontSize: 30),
                 CustomText(
                   title: "Please enter your details to continue",
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
-        
+
                 const SizedBox(height: 30),
-        
-                CustomTextFormField(title: "Full Name", hintText: "Mac kingsley"),
-        
+
+                CustomTextFormField(
+                  title: "Full Name",
+                  hintText: "Mac kingsley",
+                  controller: Fullname,
+                ),
+
                 const SizedBox(height: 20),
-        
+
                 CustomTextFormField(
                   title: "Date of Birth",
                   hintText: "01.01.0000",
+                  controller: dob,
                   isDate: true,
                 ),
-        
+
                 const SizedBox(height: 60),
-        
+
                 // Already registered text
-        Center(
-          child: RichText(
-            text: TextSpan(
-              style: GoogleFonts.poppins(  
-        fontSize: 14,
-        color: Colors.grey[700],
-              ),
-              children: [
-        TextSpan(
-          text: "Already registered? ",
-          style: GoogleFonts.nunito(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        TextSpan(
-          text: "Login",
-          style: GoogleFonts.nunito(
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
-          ),
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              // Navigate to login screen
-            },
-        ),
-              ],
-            ),
-          ),
-        ),
-        
-        
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        color: Colors.grey[700],
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Already registered? ",
+                          style: GoogleFonts.nunito(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "Login",
+                          style: GoogleFonts.nunito(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Nav.push(context, Signin());
+                            },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 30),
-        
-                CustomButton(text: "Next", onPressed: () {
-                  Nav.push(context, const Signup_two());
-                }),
+
+                CustomButton(
+                  text: "Next",
+                  onPressed: () {
+                    Nav.push(
+                      context,
+                      Signup_two(fullname: Fullname.text, dob: dob.text),
+                    );
+                  },
+                ),
               ],
             ),
           ),

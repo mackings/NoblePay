@@ -3,9 +3,6 @@ import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-
-
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
 
@@ -16,13 +13,11 @@ class MainHome extends StatefulWidget {
 class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold( 
+    return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              
               Stack(
                 children: [
                   SvgPicture.asset(
@@ -31,49 +26,50 @@ class _MainHomeState extends State<MainHome> {
                     height: 270,
                     fit: BoxFit.fill,
                   ),
-        Positioned(
-          top: 60,
-          left: 20,
-          right: 20, 
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              
-              Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        CustomText(title: "Welcome",color: Colors.white,fontWeight: FontWeight.w300,),
-          SizedBox(height: 4), 
-        CustomText(title: "Mac kingsley!",color: Colors.white,)
-        ],
-              ),
-        
-        
-        Container(
-          width: 48, 
-          height: 48,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.transparent, 
-          ),
-          child: Image.asset(
-            'assets/png/BGimg.png', 
-            fit: BoxFit.cover,
-          ),
-        ),
-        
-            ],
-          ),
-        ),
-        
+                  Positioned(
+                    top: 60,
+                    left: 20,
+                    right: 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              title: "Welcome",
+                              color: Colors.white,
+                              fontWeight: FontWeight.w300,
+                            ),
+                            SizedBox(height: 4),
+                            CustomText(
+                              title: "Mac kingsley!",
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
+
+                        Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.transparent,
+                          ),
+                          child: Image.asset(
+                            'assets/png/BGimg.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-        
-        
-        
+
               Transform.translate(
-                offset: Offset(0, -60), 
+                offset: Offset(0, -60),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: TransactionBox(
@@ -124,15 +120,10 @@ class _MainHomeState extends State<MainHome> {
                   ),
                 ),
               ),
-        
-        
             ],
           ),
         ),
       ),
-
     );
   }
 }
-
-

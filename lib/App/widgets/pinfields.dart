@@ -5,11 +5,7 @@ class PinCodeInput extends StatefulWidget {
   final int length;
   final void Function(String)? onCompleted;
 
-  const PinCodeInput({
-    super.key,
-    this.length = 4,
-    this.onCompleted,
-  });
+  const PinCodeInput({super.key, this.length = 4, this.onCompleted});
 
   @override
   State<PinCodeInput> createState() => _PinCodeInputState();
@@ -64,7 +60,10 @@ class _PinCodeInputState extends State<PinCodeInput> {
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(1)],
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(1),
+            ],
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(16),
               enabledBorder: OutlineInputBorder(

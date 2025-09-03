@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 
-
 class Nav {
   /// Push to a new page
   static void push(BuildContext context, Widget page) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => page),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 
   /// Replace current page with a new page

@@ -18,21 +18,13 @@ class OrDivider extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Divider(
-            thickness: thickness,
-            color: color,
-            endIndent: 10,
-          ),
+          child: Divider(thickness: thickness, color: color, endIndent: 10),
         ),
 
-        CustomText(title: text,color: color,fontSize: 14,),
+        CustomText(title: text, color: color, fontSize: 14),
 
         Expanded(
-          child: Divider(
-            thickness: thickness,
-            color: color,
-            indent: 10,
-          ),
+          child: Divider(thickness: thickness, color: color, indent: 10),
         ),
       ],
     );

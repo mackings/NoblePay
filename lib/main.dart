@@ -2,14 +2,10 @@ import 'package:noblepay/App/Auth/views/Onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 void main() {
-
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ),
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   );
   runApp(const MyApp());
 }
@@ -20,9 +16,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Onboarding()
-    );
+    return MaterialApp(home: Onboarding());
   }
 }
 
@@ -40,7 +34,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
     });
   }
@@ -58,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      //  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        //  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),

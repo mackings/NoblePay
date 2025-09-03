@@ -30,14 +30,15 @@ class _SuccessResetState extends State<SuccessReset> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageWrapper(
         child: Stack(
           fit: StackFit.expand,
-          children: [SvgPicture.asset("assets/svg/bgimg.svg", fit: BoxFit.cover)],
+          children: [
+            SvgPicture.asset("assets/svg/bgimg.svg", fit: BoxFit.cover),
+          ],
         ),
       ),
     );

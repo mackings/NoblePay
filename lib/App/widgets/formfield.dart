@@ -52,17 +52,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     lastDate: DateTime(2100),
                   );
                   if (pickedDate != null) {
-                    widget.controller?.text =
-                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                    widget.controller?.text = DateFormat(
+                      'yyyy-MM-dd',
+                    ).format(pickedDate);
                   }
                 }
               : null,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: GoogleFonts.nunitoSans(
-              fontSize: 16,
-              color: Colors.grey,
-            ),
+            hintStyle: GoogleFonts.nunitoSans(fontSize: 16, color: Colors.grey),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 16,
@@ -82,9 +80,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
-                      _obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility,
+                      _obscureText ? Icons.visibility_off : Icons.visibility,
                       color: Colors.grey,
                     ),
                     onPressed: () {

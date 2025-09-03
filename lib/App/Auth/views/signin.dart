@@ -13,9 +13,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 
-
-
-
 class Signin extends StatefulWidget {
   const Signin({Key? key}) : super(key: key);
 
@@ -78,9 +75,7 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ),
+      value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
       child: Scaffold(
         body: PageWrapper(
           child: SingleChildScrollView(
@@ -98,14 +93,14 @@ class _SigninState extends State<Signin> {
                     fontWeight: FontWeight.w400,
                   ),
                   const SizedBox(height: 30),
-          
+
                   CustomTextFormField(
                     title: 'Email',
                     hintText: "Enter your email",
                     controller: emailController,
                   ),
                   const SizedBox(height: 20),
-          
+
                   CustomTextFormField(
                     title: 'Password',
                     hintText: "Enter your password",
@@ -113,7 +108,7 @@ class _SigninState extends State<Signin> {
                     isPassword: true,
                   ),
                   const SizedBox(height: 8),
-          
+
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -127,12 +122,14 @@ class _SigninState extends State<Signin> {
                       ),
                     ),
                   ),
-          
+
                   const SizedBox(height: 80),
-          
+
                   // Fingerprint icon button
                   GestureDetector(
-                    onTap: _isAuthenticating ? null : _authenticateWithBiometrics,
+                    onTap: _isAuthenticating
+                        ? null
+                        : _authenticateWithBiometrics,
                     child: Container(
                       width: 60,
                       height: 60,
@@ -159,9 +156,9 @@ class _SigninState extends State<Signin> {
                             ),
                     ),
                   ),
-          
+
                   const SizedBox(height: 8),
-          
+
                   // Authentication status text
                   if (_authStatus.isNotEmpty)
                     Text(
@@ -173,9 +170,9 @@ class _SigninState extends State<Signin> {
                         fontSize: 14,
                       ),
                     ),
-          
+
                   const SizedBox(height: 40),
-          
+
                   CustomButton(
                     text: "Sign In",
                     onPressed: () {
@@ -183,7 +180,7 @@ class _SigninState extends State<Signin> {
                     },
                   ),
                   const SizedBox(height: 40),
-          
+
                   GestureDetector(
                     onTap: () {
                       Nav.push(context, Signup_one());
@@ -193,7 +190,7 @@ class _SigninState extends State<Signin> {
                     ),
                   ),
                   const SizedBox(height: 8),
-          
+
                   Center(
                     child: Text(
                       "By using this app you agree with our Terms of Use and Privacy Policy.",

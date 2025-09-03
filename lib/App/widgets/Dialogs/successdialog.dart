@@ -36,11 +36,7 @@ class SuccessDialog extends StatelessWidget {
                   end: Alignment.bottomRight,
                 ),
               ),
-              child: const Icon(
-                Icons.check,
-                color: Colors.white,
-                size: 40,
-              ),
+              child: const Icon(Icons.check, color: Colors.white, size: 40),
             ),
             const SizedBox(height: 20),
 
@@ -60,10 +56,7 @@ class SuccessDialog extends StatelessWidget {
             // Message
             Text(
               message,
-              style: GoogleFonts.nunitoSans(
-                fontSize: 15,
-                color: Colors.grey,
-              ),
+              style: GoogleFonts.nunitoSans(fontSize: 15, color: Colors.grey),
               textAlign: TextAlign.center,
             ),
 

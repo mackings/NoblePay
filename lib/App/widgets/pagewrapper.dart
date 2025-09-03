@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class PageWrapper extends StatelessWidget {
   final Widget child;
   final Color? backgroundColor;
@@ -21,7 +20,7 @@ class PageWrapper extends StatelessWidget {
       return Container(
         color: backgroundColor ?? Colors.white,
         child: SafeArea(
-          bottom: true, 
+          bottom: true,
           minimum: additionalPadding ?? EdgeInsets.zero,
           child: child,
         ),

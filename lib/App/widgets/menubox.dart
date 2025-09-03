@@ -2,7 +2,6 @@ import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class TransactionBox extends StatefulWidget {
   final String title;
   final String headerIcon; // svg path
@@ -49,15 +48,17 @@ class _TransactionBoxState extends State<TransactionBox>
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
-                )
+                ),
               ],
             ),
             child: Column(
               children: [
                 // Header with gradient
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     gradient: const LinearGradient(
@@ -68,8 +69,12 @@ class _TransactionBoxState extends State<TransactionBox>
                   ),
                   child: Row(
                     children: [
-                      SvgPicture.asset(widget.headerIcon,
-                          width: 20, height: 20, color: Colors.white),
+                      SvgPicture.asset(
+                        widget.headerIcon,
+                        width: 20,
+                        height: 20,
+                        color: Colors.white,
+                      ),
                       const SizedBox(width: 8),
                       CustomText(
                         title: widget.title,
@@ -93,11 +98,11 @@ class _TransactionBoxState extends State<TransactionBox>
                     itemCount: displayItems.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 0.8,
-                    ),
+                          crossAxisCount: 4,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 0.8,
+                        ),
                     itemBuilder: (context, index) {
                       final item = displayItems[index];
                       return GestureDetector(
@@ -111,8 +116,11 @@ class _TransactionBoxState extends State<TransactionBox>
                                 color: Colors.red.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: SvgPicture.asset(item.icon,
-                                  width: 30, height: 30),
+                              child: SvgPicture.asset(
+                                item.icon,
+                                width: 30,
+                                height: 30,
+                              ),
                             ),
                             const SizedBox(height: 6),
                             CustomText(
@@ -142,9 +150,7 @@ class _TransactionBoxState extends State<TransactionBox>
                   color: Colors.red,
                 ),
                 child: Icon(
-                  showAll
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
+                  showAll ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                   color: Colors.white,
                 ),
               ),

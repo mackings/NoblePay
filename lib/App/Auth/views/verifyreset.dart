@@ -30,65 +30,64 @@ class _VerifyResetState extends State<VerifyReset> {
             Positioned.fill(
               child: SvgPicture.asset(
                 "assets/svg/ol1.svg",
-                fit: BoxFit.contain, 
+                fit: BoxFit.contain,
               ),
             ),
-        
+
             /// Foreground Content
             SingleChildScrollView(
               child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 30.0,
-            ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 30.0,
+                ),
                 child: Column(
                   children: [
                     GradientText(text: "Enter verification code", fontSize: 30),
-            
+
                     CustomText(
                       title: "We have sent an OTP to your mail or Phone number",
                       fontSize: 18,
                       fontWeight: FontWeight.w300,
                     ),
                     const SizedBox(height: 20),
-            
+
                     PinCodeInput(
                       onCompleted: (pin) {
                         print("Entered PIN: $pin");
                       },
                     ),
-            
+
                     const SizedBox(height: 380),
-            
+
                     // Already registered text
-            
-            Center(
-              child: RichText(
-                text: TextSpan(
-                  style: GoogleFonts.nunito(
-                    fontSize: 14,
-                    color: Colors.grey[700],
-                  ),
-                  children: [
-                    TextSpan(text: "Didn't receive the OTP? "),
-                    TextSpan(
-                      text: "Resend",
-                      style: GoogleFonts.nunito(
-            color: Colors.red,
-            fontWeight: FontWeight.bold,
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          style: GoogleFonts.nunito(
+                            fontSize: 14,
+                            color: Colors.grey[700],
+                          ),
+                          children: [
+                            TextSpan(text: "Didn't receive the OTP? "),
+                            TextSpan(
+                              text: "Resend",
+                              style: GoogleFonts.nunito(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // Handle resend logic
+                                },
+                            ),
+                          ],
+                        ),
                       ),
-                      recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              // Handle resend logic
-            },
                     ),
-                  ],
-                ),
-              ),
-            ),
-            
+
                     const SizedBox(height: 20),
-            
+
                     CustomButton(
                       text: "Verify Now",
                       onPressed: () {
