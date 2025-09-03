@@ -19,7 +19,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 90, // increase height to allow QR button to float
+      height: 100, // increase height to allow QR button to float
       child: Stack(
         alignment: Alignment.bottomCenter,
         clipBehavior: Clip.none, // allow drawing outside

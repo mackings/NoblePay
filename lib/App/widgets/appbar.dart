@@ -15,59 +15,53 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.onCaution,
   }) : super(key: key);
 
-  // 🔹 This sets AppBar height
   @override
   Size get preferredSize => const Size.fromHeight(70);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        height: preferredSize.height,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // 🔹 Back Button with gradient circle + border circle
-            GestureDetector(
-              onTap: onBack,
-              child: _buildCircleIcon(Icons.arrow_back),
-            ),
+    // Get status bar height
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
 
-            // 🔹 Title
-            Expanded(
-              child: Center(
-                child: Text(
-                  title,
-                  style: GoogleFonts.nunito(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+    return Container(
+      color: Colors.white,
+      padding: EdgeInsets.only(top: statusBarHeight, left: 16, right: 16),
+      height: preferredSize.height + statusBarHeight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+            onTap: onBack,
+            child: _buildCircleIcon(Icons.arrow_back),
+          ),
+          Expanded(
+            child: Center(
+              child: Text(
+                title,
+                style: GoogleFonts.nunito(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
               ),
             ),
-
-            // 🔹 Caution Button with same style
-            GestureDetector(
-              onTap: onCaution,
-              child: _buildCircleIcon(Icons.warning_amber_rounded),
-            ),
-          ],
-        ),
+          ),
+          GestureDetector(
+            onTap: onCaution,
+            child: _buildCircleIcon(Icons.warning_amber_rounded),
+          ),
+        ],
       ),
     );
   }
 
-  /// 🔹 Helper: builds gradient inner circle + border circle
   Widget _buildCircleIcon(IconData icon) {
     return Container(
-
       padding: const EdgeInsets.all(2), // space for border
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: const Color(0xFFCC204A), // border color
+          color: const Color(0xFFCC204A),
           width: 2,
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:NoblePay/App/Auth/views/signin.dart';
 import 'package:NoblePay/App/widgets/navigator.dart';
+import 'package:NoblePay/App/widgets/pagewrapper.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -43,13 +44,13 @@ class _ScrollsState extends State<Scrolls> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: SvgPicture.asset('assets/svg/ol1.svg', fit: BoxFit.contain),
-          ),
-          SafeArea(
-            child: Column(
+      body: PageWrapper(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SvgPicture.asset('assets/svg/ol1.svg', fit: BoxFit.contain),
+            ),
+            Column(
               children: [
                 Expanded(
                   child: CarouselSlider.builder(
@@ -66,7 +67,7 @@ class _ScrollsState extends State<Scrolls> {
                             height: 290,
                           ),
                           const SizedBox(height: 20),
-
+            
                           ListTile(
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 39,
@@ -167,8 +168,8 @@ class _ScrollsState extends State<Scrolls> {
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

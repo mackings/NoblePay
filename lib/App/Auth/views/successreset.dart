@@ -1,6 +1,7 @@
 import 'package:NoblePay/App/Auth/views/signin.dart';
 import 'package:NoblePay/App/widgets/Dialogs/successdialog.dart';
 import 'package:NoblePay/App/widgets/navigator.dart';
+import 'package:NoblePay/App/widgets/pagewrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -33,9 +34,11 @@ class _SuccessResetState extends State<SuccessReset> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [SvgPicture.asset("assets/svg/bgimg.svg", fit: BoxFit.cover)],
+      body: PageWrapper(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [SvgPicture.asset("assets/svg/bgimg.svg", fit: BoxFit.cover)],
+        ),
       ),
     );
   }

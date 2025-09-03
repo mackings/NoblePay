@@ -1,5 +1,6 @@
 import 'package:NoblePay/App/widgets/appbar.dart';
 import 'package:NoblePay/App/widgets/gradienttext.dart';
+import 'package:NoblePay/App/widgets/pagewrapper.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,20 +48,20 @@ class _ScanqrState extends State<Scanqr> {
         title: "Scan Qrcode",
         onBack: () {
           if (isScanning) {
-            _stopScanner(); // Go back to normal UI
+            _stopScanner(); 
           } else {
             Navigator.pop(context);
           }
         },
         onCaution: () {},
       ),
-      body: SafeArea(
+      body: PageWrapper(
         child: Center(
           child: isScanning
               ? Column(
                   children: [
                     const SizedBox(height: 20),
-
+        
                     // ✅ Scanner view
                     SizedBox(
                       height: 300,
@@ -82,9 +83,9 @@ class _ScanqrState extends State<Scanqr> {
                         ),
                       ),
                     ),
-
+        
                     const SizedBox(height: 20),
-
+        
                     // ✅ Flash & Camera switch buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -100,9 +101,9 @@ class _ScanqrState extends State<Scanqr> {
                         ),
                       ],
                     ),
-
+        
                     const SizedBox(height: 20),
-
+        
                     TextButton(
                       onPressed: _stopScanner,
                       child: const CustomText(title: "Cancel")
@@ -113,32 +114,32 @@ class _ScanqrState extends State<Scanqr> {
                   child: Column(
                     children: [
                       const SizedBox(height: 120),
-
+        
                       SvgPicture.asset(
                         "assets/svg/icons/qr.svg",
                         color: Colors.black,
                         width: 150,
                         height: 150,
                       ),
-
+        
                       const SizedBox(height: 40),
-
+        
                      
                       GestureDetector(
                         onTap: _startScanner,
                         child: const GradientText(text: "Scan to Pay"),
                       ),
-
+        
                       const SizedBox(height: 20),
-
+        
                       if (scannedResult != null)
                         Text(
                           "Scanned Result: $scannedResult",
                           style: const TextStyle(fontSize: 16),
                         ),
-
+        
                       const SizedBox(height: 280),
-
+        
                       SvgPicture.asset(
                         "assets/svg/logo.svg",
                         width: 15,

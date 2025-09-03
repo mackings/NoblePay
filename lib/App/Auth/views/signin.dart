@@ -6,6 +6,7 @@ import 'package:NoblePay/App/widgets/button.dart';
 import 'package:NoblePay/App/widgets/formfield.dart';
 import 'package:NoblePay/App/widgets/gradienttext.dart';
 import 'package:NoblePay/App/widgets/navigator.dart';
+import 'package:NoblePay/App/widgets/pagewrapper.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -77,12 +78,13 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      backgroundColor: Colors.white,
+      body: PageWrapper(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
-              vertical: 20.0,
+              vertical: 40.0,
             ),
             child: Column(
               children: [
@@ -93,14 +95,14 @@ class _SigninState extends State<Signin> {
                   fontWeight: FontWeight.w400,
                 ),
                 const SizedBox(height: 30),
-
+        
                 CustomTextFormField(
                   title: 'Email',
                   hintText: "Enter your email",
                   controller: emailController,
                 ),
                 const SizedBox(height: 20),
-
+        
                 CustomTextFormField(
                   title: 'Password',
                   hintText: "Enter your password",
@@ -108,7 +110,7 @@ class _SigninState extends State<Signin> {
                   isPassword: true,
                 ),
                 const SizedBox(height: 8),
-
+        
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
@@ -122,9 +124,9 @@ class _SigninState extends State<Signin> {
                     ),
                   ),
                 ),
-
+        
                 const SizedBox(height: 80),
-
+        
                 // Fingerprint icon button
                 GestureDetector(
                   onTap: _isAuthenticating ? null : _authenticateWithBiometrics,
@@ -154,9 +156,9 @@ class _SigninState extends State<Signin> {
                           ),
                   ),
                 ),
-
+        
                 const SizedBox(height: 8),
-
+        
                 // Authentication status text
                 if (_authStatus.isNotEmpty)
                   Text(
@@ -168,9 +170,9 @@ class _SigninState extends State<Signin> {
                       fontSize: 14,
                     ),
                   ),
-
+        
                 const SizedBox(height: 40),
-
+        
                 CustomButton(
                   text: "Sign In",
                   onPressed: () {
@@ -178,7 +180,7 @@ class _SigninState extends State<Signin> {
                   },
                 ),
                 const SizedBox(height: 40),
-
+        
                 GestureDetector(
                   onTap: () {
                     Nav.push(context, Signup_one());
@@ -188,7 +190,7 @@ class _SigninState extends State<Signin> {
                   ),
                 ),
                 const SizedBox(height: 8),
-
+        
                 Center(
                   child: Text(
                     "By using this app you agree with our Terms of Use and Privacy Policy.",

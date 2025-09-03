@@ -1,5 +1,6 @@
 import 'package:NoblePay/App/Home/Views/mainhome.dart';
 import 'package:NoblePay/App/widgets/navbar.dart';
+import 'package:NoblePay/App/widgets/pagewrapper.dart';
 import 'package:flutter/material.dart';
 
 
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[selectedIndex],
+      body: PageWrapper(child: pages[selectedIndex]),
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: selectedIndex,
         onTap: (index) {
