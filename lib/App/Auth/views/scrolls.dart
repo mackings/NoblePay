@@ -1,7 +1,8 @@
-import 'package:NoblePay/App/widgets/text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:noblepay/App/widgets/text.dart';
 
 
 class Scrolls extends StatefulWidget {
@@ -39,12 +40,12 @@ class _ScrollsState extends State<Scrolls> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/svg/ol1.svg',
-              fit: BoxFit.contain,
-            ),
-          ),
+          // Positioned.fill(
+          //   child: SvgPicture.asset(
+          //     'assets/svg/ol1.svg',
+          //     fit: BoxFit.contain,
+          //   ),
+          // ),
           SafeArea(
             child: Column(
               children: [

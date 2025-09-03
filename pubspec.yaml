@@ -1,4 +1,4 @@
-name: NoblePay
+name: noblepay
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -37,7 +37,7 @@ dependencies:
   shared_preferences: ^2.5.3
   http: ^1.5.0
   google_fonts: ^6.3.1
-  flutter_native_splash: ^2.4.6
+  # flutter_native_splash: ^2.4.6
   flutter_svg: ^2.2.0
   carousel_slider: ^5.1.1
 
@@ -51,7 +51,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
-  flutter_native_splash: ^2.4.6 
+  # flutter_native_splash: ^2.4.6 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -98,12 +98,12 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 
-flutter_native_splash:
-  android: true
-  ios: true
-  web: false
-  fullscreen: true
-  background_image: assets/png/splash.png
-  android_gravity: center
-  ios_content_mode: center
+# flutter_native_splash:
+#   android: true
+#   ios: true
+#   web: false
+#   fullscreen: true
+#   background_image: assets/png/splash.png
+#   android_gravity: center
+#   ios_content_mode: center
 
