@@ -23,14 +23,14 @@ class _VerifyResetState extends State<VerifyReset> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: PageWrapper(
+      body: SafeArea(
         child: Stack(
           children: [
             /// Background SVG
             Positioned.fill(
               child: SvgPicture.asset(
                 "assets/svg/ol1.svg",
-                fit: BoxFit.contain, // or BoxFit.contain if you want
+                fit: BoxFit.contain, 
               ),
             ),
         

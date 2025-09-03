@@ -2,11 +2,10 @@
 import 'package:NoblePay/App/Auth/views/scrolls.dart';
 import 'package:NoblePay/App/widgets/button.dart';
 import 'package:NoblePay/App/widgets/navigator.dart';
-import 'package:NoblePay/App/widgets/pagewrapper.dart';
 import 'package:NoblePay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 
 
@@ -20,15 +19,15 @@ class Onboarding extends StatefulWidget {
 class _OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
-    return PageWrapper(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
           children: [
             Positioned.fill(
               child: SvgPicture.asset(
                 'assets/svg/ol1.svg', // replace with your background SVG path
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
                 width: 200,
                 height: 100,
               ),

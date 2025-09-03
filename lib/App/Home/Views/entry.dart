@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageWrapper(child: pages[selectedIndex]),
+      body: pages[selectedIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: selectedIndex,
         onTap: (index) {

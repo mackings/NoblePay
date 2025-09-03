@@ -18,10 +18,10 @@ class Forgetpassword extends StatefulWidget {
 class _ForgetpasswordState extends State<Forgetpassword> {
   @override
   Widget build(BuildContext context) {
-    return PageWrapper(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,

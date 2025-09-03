@@ -44,132 +44,130 @@ class _ScrollsState extends State<Scrolls> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: PageWrapper(
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: SvgPicture.asset('assets/svg/ol1.svg', fit: BoxFit.contain),
-            ),
-            Column(
-              children: [
-                Expanded(
-                  child: CarouselSlider.builder(
-                    carouselController: _carouselController,
-                    itemCount: slides.length,
-                    itemBuilder: (context, index, realIndex) {
-                      final slide = slides[index];
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            slide["image"]!,
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: 290,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: SvgPicture.asset('assets/svg/ol1.svg', fit: BoxFit.contain),
+          ),
+          Column(
+            children: [
+              Expanded(
+                child: CarouselSlider.builder(
+                  carouselController: _carouselController,
+                  itemCount: slides.length,
+                  itemBuilder: (context, index, realIndex) {
+                    final slide = slides[index];
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          slide["image"]!,
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 290,
+                        ),
+                        const SizedBox(height: 20),
+          
+                        ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 39,
                           ),
-                          const SizedBox(height: 20),
-            
-                          ListTile(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 39,
-                            ),
-                            title: CustomText(
-                              title: slide["title"]!,
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
-                              textAlign: TextAlign.left,
-                            ),
-                            subtitle: CustomText(
-                              title: slide["subtitle"]!,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[700]!,
-                              textAlign: TextAlign.left,
-                            ),
+                          title: CustomText(
+                            title: slide["title"]!,
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.left,
+                          ),
+                          subtitle: CustomText(
+                            title: slide["subtitle"]!,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey[700]!,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  options: CarouselOptions(
+                    viewportFraction: 1.0,
+                    enableInfiniteScroll: false,
+                    height: double.infinity,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _currentPage = index;
+                      });
+                    },
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: slides.asMap().entries.map((entry) {
+                  return Container(
+                    width: _currentPage == entry.key ? 12.0 : 8.0,
+                    height: _currentPage == entry.key ? 12.0 : 8.0,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 4.0,
+                      vertical: 20.0,
+                    ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentPage == entry.key
+                          ? Colors.red
+                          : Colors.grey[400],
+                    ),
+                  );
+                }).toList(),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40.0,
+                  vertical: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        // _carouselController.jumpToPage(slides.length - 1);
+                        Nav.push(context, Signin());
+                      },
+                      child: CustomText(
+                        title: "Skip",
+                        fontSize: 16,
+                        color: Colors.red,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (_currentPage < slides.length - 1) {
+                          _carouselController.nextPage();
+                        } else {
+                          // Finished, go to next screen
+                        }
+                      },
+                      child: Row(
+                        children: const [
+                          CustomText(
+                            title: "Next",
+                            fontSize: 16,
+                            color: Colors.red,
+                          ),
+                          SizedBox(width: 4),
+                          Icon(
+                            Icons.arrow_right_alt,
+                            color: Colors.red,
+                            size: 20,
                           ),
                         ],
-                      );
-                    },
-                    options: CarouselOptions(
-                      viewportFraction: 1.0,
-                      enableInfiniteScroll: false,
-                      height: double.infinity,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _currentPage = index;
-                        });
-                      },
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: slides.asMap().entries.map((entry) {
-                    return Container(
-                      width: _currentPage == entry.key ? 12.0 : 8.0,
-                      height: _currentPage == entry.key ? 12.0 : 8.0,
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 4.0,
-                        vertical: 20.0,
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _currentPage == entry.key
-                            ? Colors.red
-                            : Colors.grey[400],
-                      ),
-                    );
-                  }).toList(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 20,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          // _carouselController.jumpToPage(slides.length - 1);
-                          Nav.push(context, Signin());
-                        },
-                        child: CustomText(
-                          title: "Skip",
-                          fontSize: 16,
-                          color: Colors.red,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          if (_currentPage < slides.length - 1) {
-                            _carouselController.nextPage();
-                          } else {
-                            // Finished, go to next screen
-                          }
-                        },
-                        child: Row(
-                          children: const [
-                            CustomText(
-                              title: "Next",
-                              fontSize: 16,
-                              color: Colors.red,
-                            ),
-                            SizedBox(width: 4),
-                            Icon(
-                              Icons.arrow_right_alt,
-                              color: Colors.red,
-                              size: 20,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TransactionBox extends StatefulWidget {
   final String title;
   final String headerIcon; // svg path
-  final List<TransactionItem> items; 
+  final List<TransactionItem> items;
 
   const TransactionBox({
     super.key,
@@ -19,127 +19,139 @@ class TransactionBox extends StatefulWidget {
   State<TransactionBox> createState() => _TransactionBoxState();
 }
 
-class _TransactionBoxState extends State<TransactionBox> {
+class _TransactionBoxState extends State<TransactionBox>
+    with SingleTickerProviderStateMixin {
   bool showAll = false;
 
   @override
   Widget build(BuildContext context) {
     final displayItems = showAll ? widget.items : widget.items.take(4).toList();
 
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        // Main Container
-        Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.only(
-            top: 16,
-            left: 12,
-            right: 12,
-            bottom: 32, // leave space for button
-          ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
-              )
-            ],
-          ),
-          child: Column(
-            children: [
-              // Header with gradient
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFCC204A), Color(0xFFFD4E25)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
+    return SafeArea(
+      top: false, // only care about bottom safe area
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          // Main Container
+          Container(
+            margin: const EdgeInsets.all(16),
+            padding: const EdgeInsets.only(
+              top: 16,
+              left: 12,
+              right: 12,
+              bottom: 48, // more space for button
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                )
+              ],
+            ),
+            child: Column(
+              children: [
+                // Header with gradient
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFFCC204A), Color(0xFFFD4E25)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(widget.headerIcon,
+                          width: 20, height: 20, color: Colors.white),
+                      const SizedBox(width: 8),
+                      CustomText(
+                        title: widget.title,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ],
                   ),
                 ),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(widget.headerIcon, width: 20, height: 20, color: Colors.white),
-                    const SizedBox(width: 8),
-                    CustomText(
-                      title: widget.title,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              // Grid of items
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: displayItems.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 12,
-                  childAspectRatio: 0.8,
-                ),
-                itemBuilder: (context, index) {
-                  final item = displayItems[index];
-                  return GestureDetector(
-                    onTap: item.onTap,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.red.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: SvgPicture.asset(item.icon, width: 30, height: 30),
-                        ),
-                        const SizedBox(height: 6),
-                        CustomText(
-                          title: item.label,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w600,
-                          //align: TextAlign.center,
-                        ),
-                      ],
+                // Grid of items with animation
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: displayItems.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 12,
+                      childAspectRatio: 0.8,
                     ),
-                  );
-                },
-              ),
-            ],
+                    itemBuilder: (context, index) {
+                      final item = displayItems[index];
+                      return GestureDetector(
+                        onTap: item.onTap,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.red.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: SvgPicture.asset(item.icon,
+                                  width: 30, height: 30),
+                            ),
+                            const SizedBox(height: 6),
+                            CustomText(
+                              title: item.label,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
 
-        // Floating expand/collapse button at bottom center
-
-        Positioned(
-          bottom:1,
-          child: GestureDetector(
-            onTap: () => setState(() => showAll = !showAll),
-            child: Container(
-              padding: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.red,
-              ),
-              child: Icon(
-                showAll ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                color: Colors.white,
+          // Floating expand/collapse button at bottom center
+          Positioned(
+            bottom: 8,
+            child: GestureDetector(
+              onTap: () => setState(() => showAll = !showAll),
+              child: Container(
+                padding: const EdgeInsets.all(6),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.red,
+                ),
+                child: Icon(
+                  showAll
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
