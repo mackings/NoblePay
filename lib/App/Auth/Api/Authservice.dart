@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:noblepay/App/widgets/constants/const.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ApiService {
+  
   final String _baseUrl = Constants.baseUrl;
+   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 
   /// Register a new customer
   Future<Map<String, dynamic>> registerCustomer(
@@ -253,4 +256,87 @@ class ApiService {
       };
     }
   }
+
+
+  /// Verify login with OTP
+  Future<Map<String, dynamic>> verifyLogin({
+    String? email,
+    String? phoneNumber,
+    required String otp,
+  }) async {
+    final url = Uri.parse("$_baseUrl/Auth/verify/login");
+
+    final payload = {
+      if (email != null) "email": email,
+      if (phoneNumber != null) "phoneNumber": phoneNumber,
+      "otp": otp,
+    };
+
+    try {
+      print("🔹 VerifyLogin API Call");
+      print("➡️ URL: $url");
+      print("📦 Payload: ${jsonEncode(payload)}");
+
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: jsonEncode(payload),
+      );
+
+      print("⬅️ Status Code: ${response.statusCode}");
+      print("📩 Response Body: ${response.body}");
+
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && decoded["isSuccess"] == true) {
+        final data = decoded["data"];
+
+        // ✅ Save to secure storage
+        if (data != null) {
+          await _secureStorage.write(key: "userId", value: data["userId"]);
+          await _secureStorage.write(key: "email", value: data["email"]);
+          await _secureStorage.write(key: "phoneNumber", value: data["phoneNumber"]);
+          await _secureStorage.write(key: "accessToken", value: data["accessToken"]);
+          await _secureStorage.write(key: "refreshToken", value: data["refreshToken"]);
+          await _secureStorage.write(key: "expires", value: data["expires"]);
+          await _secureStorage.write(key: "refreshTokenExpiresAt", value: data["refreshTokenExpiresAt"]);
+        }
+
+        return decoded;
+      }
+
+      if (decoded["errors"] != null) {
+        final errors = decoded["errors"] as Map<String, dynamic>;
+        final errorMessages = errors.entries
+            .map((e) => "${e.key}: ${(e.value as List).join(", ")}")
+            .join("\n");
+        return {"isSuccess": false, "message": errorMessages, "data": null};
+      }
+
+      if (decoded["message"] != null) {
+        return {
+          "isSuccess": false,
+          "message": decoded["message"],
+          "data": null,
+        };
+      }
+
+      return {
+        "isSuccess": false,
+        "message": "Unexpected server error (${response.statusCode})",
+        "data": null,
+      };
+    } catch (e) {
+      print("❌ VerifyLogin failed: $e");
+      return {
+        "isSuccess": false,
+        "message": "VerifyLogin request failed: $e",
+        "data": null,
+      };
+    }
+  }
+
 }

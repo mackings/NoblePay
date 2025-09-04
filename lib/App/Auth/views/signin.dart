@@ -1,4 +1,5 @@
 import 'package:noblepay/App/Auth/Api/Authservice.dart';
+import 'package:noblepay/App/Auth/views/2factor.dart';
 import 'package:noblepay/App/Auth/views/forgetpassword.dart';
 import 'package:noblepay/App/Auth/views/signup_one.dart';
 import 'package:noblepay/App/Home/Views/entry.dart';
@@ -89,9 +90,25 @@ class _SigninState extends State<Signin> {
       SnackBar(content: Text(result["message"] ?? "Login failed")),
     );
 
-    if (result["isSuccess"] == true) {
-      Nav.push(context, HomePage());
-    }
+if (result["isSuccess"] == true) {
+  showModalBottomSheet(
+    context: context,
+    isDismissible: false,
+    enableDrag: false,
+    isScrollControlled: true,
+    backgroundColor: Colors.white,
+    builder: (context) {
+      return WillPopScope(
+        onWillPop: () async => false, // prevent back button
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.65,
+          child: Twofactor(email: emailController.text.trim()), // pass email
+        ),
+      );
+    },
+  );
+}
+
   }
 
   @override
