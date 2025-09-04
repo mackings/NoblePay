@@ -1,12 +1,16 @@
+import 'package:noblepay/App/Auth/Api/Authservice.dart';
 import 'package:noblepay/App/Auth/views/verification.dart';
 import 'package:noblepay/App/widgets/button.dart';
+import 'package:noblepay/App/widgets/devicehelper.dart';
 import 'package:noblepay/App/widgets/formfield.dart';
 import 'package:noblepay/App/widgets/gradienttext.dart';
+import 'package:noblepay/App/widgets/loader.dart';
 import 'package:noblepay/App/widgets/navigator.dart';
 import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Signup_two extends StatefulWidget {
   final String fullname;
@@ -29,6 +33,8 @@ class _Signup_twoState extends State<Signup_two> {
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,7 +49,6 @@ class _Signup_twoState extends State<Signup_two> {
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();
 
- 
     print("From Page 1 => Fullname: ${widget.fullname}, DOB: ${widget.dob}");
   }
 
@@ -61,107 +66,160 @@ class _Signup_twoState extends State<Signup_two> {
     super.dispose();
   }
 
+  Future<void> _register() async {
+    setState(() => isLoading = true);
+
+    final api = ApiService();
+
+    // ✅ get device info
+    final deviceInfo = await DeviceHelper.getDeviceInfo();
+
+    final payload = {
+      "email": emailController.text,
+      "phoneNumber": phoneController.text,
+      "userName": usernameController.text,
+      "password": passwordController.text,
+      "firstName": widget.fullname.split(" ").first,
+      "lastName": widget.fullname.split(" ").length > 1
+          ? widget.fullname.split(" ").last
+          : "",
+      "birthDate": widget.dob,
+      "address": {
+        "street_address": streetController.text,
+        "city": cityController.text,
+        "state": "NY",
+        "postal_code": postalController.text,
+        "country": countryController.text,
+      },
+      "deviceInfo": deviceInfo, // ✅ real device info
+      "marketingPreferences": {
+        "email_offers": true,
+        "sms_offers": false,
+        "consent_date": DateTime.now().toIso8601String(),
+      },
+    };
+
+    final result = await api.registerCustomer(payload);
+
+    setState(() => isLoading = false);
+
+    if (result["isSuccess"] == true) {
+      // ✅ Save email & phone for verification
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("user_email", emailController.text);
+      await prefs.setString("user_phone", phoneController.text);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result["message"] ?? "Registration successful")),
+      );
+
+      Nav.push(context, const Verification());
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(result["message"] ?? "Registration failed")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageWrapper(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 30.0,
-            ),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "Step 2 of 2",
-                    style: GoogleFonts.nunito(
-                      color: Colors.red,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+    return LoadingOverlay(
+      isLoading: isLoading,
+      child: Scaffold(
+        body: PageWrapper(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 30.0,
+              ),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Nav.push(context, Verification());
+                    },
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Text(
+                        "Step 2 of 2",
+                        style: GoogleFonts.nunito(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 40),
-                GradientText(text: "Sign up", fontSize: 30),
-                CustomText(
-                  title: "Please enter your details to continue",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w300,
-                ),
-                const SizedBox(height: 30),
+                  const SizedBox(height: 40),
+                  GradientText(text: "Sign up", fontSize: 30),
+                  CustomText(
+                    title: "Please enter your details to continue",
+                    fontSize: 18,
+                    fontWeight: FontWeight.w300,
+                  ),
+                  const SizedBox(height: 30),
 
-                CustomTextFormField(
-                  title: "Username",
-                  hintText: "Mac kingsley",
-                  controller: usernameController,
-                ),
+                  CustomTextFormField(
+                    title: "Username",
+                    hintText: "Mac kingsley",
+                    controller: usernameController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Email",
+                    hintText: "example@email.com",
+                    controller: emailController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Phone number",
+                    hintText: "8111111111",
+                    controller: phoneController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Street Address",
+                    hintText: "Moscow GP 2030",
+                    controller: streetController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "City",
+                    hintText: "Moscow GP 2030",
+                    controller: cityController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Country",
+                    hintText: "Moscow GP 2030",
+                    controller: countryController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Postal Code",
+                    hintText: "2030",
+                    controller: postalController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Password",
+                    hintText: "********",
+                    isPassword: true,
+                    controller: passwordController,
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextFormField(
+                    title: "Confirm Password",
+                    hintText: "********",
+                    isPassword: true,
+                    controller: confirmPasswordController,
+                  ),
+                  const SizedBox(height: 30),
 
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Email",
-                  hintText: "example@email.com",
-                  controller: emailController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Phone number",
-                  hintText: "8111111111",
-                  controller: phoneController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Street Address",
-                  hintText: "Moscow GP 2030",
-                  controller: streetController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "City",
-                  hintText: "Moscow GP 2030",
-                  controller: cityController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Country",
-                  hintText: "Moscow GP 2030",
-                  controller: countryController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Postal Code",
-                  hintText: "2030",
-                  controller: postalController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Password",
-                  hintText: "********",
-                  isPassword: true,
-                  controller: passwordController,
-                ),
-                const SizedBox(height: 10),
-                CustomTextFormField(
-                  title: "Confirm Password",
-                  hintText: "********",
-                  isPassword: true,
-                  controller: confirmPasswordController,
-                ),
-                const SizedBox(height: 30),
-                CustomButton(
-                  text: "Sign Up",
-                  onPressed: () {
-                    // Example: Collect all entered data
-                    print("Fullname (from Page 1): ${widget.fullname}");
-                    print("DOB (from Page 1): ${widget.dob}");
-                    print("Email: ${emailController.text}");
-
-                    Nav.push(context, const Verification());
-                  },
-                ),
-              ],
+                  CustomButton(text: "Sign Up", onPressed: _register),
+                ],
+              ),
             ),
           ),
         ),

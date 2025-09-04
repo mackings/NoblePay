@@ -1,10 +1,11 @@
+import 'package:noblepay/App/Auth/Api/Authservice.dart';
 import 'package:noblepay/App/Auth/views/forgetpassword.dart';
 import 'package:noblepay/App/Auth/views/signup_one.dart';
 import 'package:noblepay/App/Home/Views/entry.dart';
-import 'package:noblepay/App/Home/Views/mainhome.dart';
 import 'package:noblepay/App/widgets/button.dart';
 import 'package:noblepay/App/widgets/formfield.dart';
 import 'package:noblepay/App/widgets/gradienttext.dart';
+import 'package:noblepay/App/widgets/loader.dart';
 import 'package:noblepay/App/widgets/navigator.dart';
 import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:noblepay/App/widgets/text.dart';
@@ -27,6 +28,7 @@ class _SigninState extends State<Signin> {
   final LocalAuthentication auth = LocalAuthentication();
 
   bool _isAuthenticating = false;
+  bool isLoading = false;
   String _authStatus = '';
 
   Future<void> _authenticateWithBiometrics() async {
@@ -53,8 +55,8 @@ class _SigninState extends State<Signin> {
         setState(() {
           _authStatus = 'Authentication Successful';
         });
-        // Call login or navigate to home screen
         print("Authenticated successfully");
+        // Call login or navigate to home screen
       } else {
         setState(() {
           _authStatus = 'Authentication Failed';
@@ -72,11 +74,32 @@ class _SigninState extends State<Signin> {
     }
   }
 
+  Future<void> _login() async {
+    setState(() => isLoading = true);
+
+    final api = ApiService();
+    final result = await api.loginCustomer(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
+
+    setState(() => isLoading = false);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(result["message"] ?? "Login failed")),
+    );
+
+    if (result["isSuccess"] == true) {
+      Nav.push(context, HomePage());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+    return LoadingOverlay(
+      isLoading: isLoading,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: PageWrapper(
           child: SingleChildScrollView(
             child: Padding(
@@ -93,14 +116,12 @@ class _SigninState extends State<Signin> {
                     fontWeight: FontWeight.w400,
                   ),
                   const SizedBox(height: 30),
-
                   CustomTextFormField(
                     title: 'Email',
                     hintText: "Enter your email",
                     controller: emailController,
                   ),
                   const SizedBox(height: 20),
-
                   CustomTextFormField(
                     title: 'Password',
                     hintText: "Enter your password",
@@ -108,7 +129,6 @@ class _SigninState extends State<Signin> {
                     isPassword: true,
                   ),
                   const SizedBox(height: 8),
-
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -122,9 +142,7 @@ class _SigninState extends State<Signin> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 80),
-
                   // Fingerprint icon button
                   GestureDetector(
                     onTap: _isAuthenticating
@@ -156,10 +174,7 @@ class _SigninState extends State<Signin> {
                             ),
                     ),
                   ),
-
                   const SizedBox(height: 8),
-
-                  // Authentication status text
                   if (_authStatus.isNotEmpty)
                     Text(
                       _authStatus,
@@ -170,17 +185,12 @@ class _SigninState extends State<Signin> {
                         fontSize: 14,
                       ),
                     ),
-
                   const SizedBox(height: 40),
-
                   CustomButton(
                     text: "Sign In",
-                    onPressed: () {
-                      Nav.push(context, HomePage());
-                    },
+                    onPressed: _login, // ✅ Call the API
                   ),
                   const SizedBox(height: 40),
-
                   GestureDetector(
                     onTap: () {
                       Nav.push(context, Signup_one());
@@ -190,7 +200,6 @@ class _SigninState extends State<Signin> {
                     ),
                   ),
                   const SizedBox(height: 8),
-
                   Center(
                     child: Text(
                       "By using this app you agree with our Terms of Use and Privacy Policy.",
