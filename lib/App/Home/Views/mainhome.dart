@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:noblepay/App/widgets/menubox.dart';
 import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,28 @@ class MainHome extends StatefulWidget {
 }
 
 class _MainHomeState extends State<MainHome> {
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  String? username;
+
+  String _capitalize(String? value) {
+  if (value == null || value.isEmpty) return "User";
+  return value[0].toUpperCase() + value.substring(1);
+}
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final storedUsername = await _secureStorage.read(key: "username");
+    setState(() {
+      username = storedUsername ?? "User"; // fallback if null
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,18 +65,18 @@ class _MainHomeState extends State<MainHome> {
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             CustomText(
-                              title: "Mac kingsley!",
-                              color: Colors.white,
-                            ),
+  title: username != null ? "${_capitalize(username)}!" : "User",
+  color: Colors.white,
+),
+
                           ],
                         ),
-
                         Container(
                           width: 48,
                           height: 48,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.transparent,
                           ),
@@ -69,7 +92,7 @@ class _MainHomeState extends State<MainHome> {
               ),
 
               Transform.translate(
-                offset: Offset(0, -60),
+                offset: const Offset(0, -60),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: TransactionBox(
@@ -127,3 +150,4 @@ class _MainHomeState extends State<MainHome> {
     );
   }
 }
+

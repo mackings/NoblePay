@@ -296,6 +296,8 @@ class ApiService {
 
         // ✅ Save to secure storage
         if (data != null) {
+
+          await _secureStorage.write(key: "username", value: data["userName"]);
           await _secureStorage.write(key: "userId", value: data["userId"]);
           await _secureStorage.write(key: "email", value: data["email"]);
           await _secureStorage.write(key: "phoneNumber", value: data["phoneNumber"]);

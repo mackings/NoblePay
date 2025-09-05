@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:noblepay/App/Auth/Api/Authservice.dart';
 import 'package:noblepay/App/Home/Views/entry.dart';
-import 'package:noblepay/App/Home/Views/mainhome.dart';
 import 'package:noblepay/App/widgets/button.dart';
 import 'package:noblepay/App/widgets/gradienttext.dart';
 import 'package:noblepay/App/widgets/loader.dart';
@@ -11,6 +10,7 @@ import 'package:noblepay/App/widgets/navigator.dart';
 import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:noblepay/App/widgets/pinfields.dart';
 import 'package:noblepay/App/widgets/text.dart';
+
 
 
 
