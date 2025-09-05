@@ -4,8 +4,6 @@ import 'package:noblepay/App/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
 
@@ -18,10 +16,9 @@ class _MainHomeState extends State<MainHome> {
   String? username;
 
   String _capitalize(String? value) {
-  if (value == null || value.isEmpty) return "User";
-  return value[0].toUpperCase() + value.substring(1);
-}
-
+    if (value == null || value.isEmpty) return "User";
+    return value[0].toUpperCase() + value.substring(1);
+  }
 
   @override
   void initState() {
@@ -69,10 +66,11 @@ class _MainHomeState extends State<MainHome> {
                             ),
                             const SizedBox(height: 4),
                             CustomText(
-  title: username != null ? "${_capitalize(username)}!" : "User",
-  color: Colors.white,
-),
-
+                              title: username != null
+                                  ? "${_capitalize(username)}!"
+                                  : "User",
+                              color: Colors.white,
+                            ),
                           ],
                         ),
                         Container(
@@ -152,4 +150,3 @@ class _MainHomeState extends State<MainHome> {
     );
   }
 }
-

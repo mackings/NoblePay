@@ -13,10 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-
 class VerifyReset extends StatefulWidget {
-  final String email; 
+  final String email;
   const VerifyReset({super.key, required this.email});
 
   @override
@@ -63,7 +61,9 @@ class _VerifyResetState extends State<VerifyReset> {
 
     if (result["isSuccess"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(result["message"] ?? "Password reset successful")),
+        SnackBar(
+          content: Text(result["message"] ?? "Password reset successful"),
+        ),
       );
       Nav.push(context, const SuccessReset());
     } else {
@@ -99,7 +99,10 @@ class _VerifyResetState extends State<VerifyReset> {
                   ),
                   child: Column(
                     children: [
-                      GradientText(text: "Enter verification code", fontSize: 30),
+                      GradientText(
+                        text: "Enter verification code",
+                        fontSize: 30,
+                      ),
 
                       CustomText(
                         title:
@@ -170,5 +173,3 @@ class _VerifyResetState extends State<VerifyReset> {
     );
   }
 }
-
-

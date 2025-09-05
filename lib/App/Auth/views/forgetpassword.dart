@@ -97,10 +97,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
 
                     const SizedBox(height: 200),
 
-                    CustomButton(
-                      text: "Continue",
-                      onPressed: _forgotPassword, 
-                    ),
+                    CustomButton(text: "Continue", onPressed: _forgotPassword),
 
                     const SizedBox(height: 30),
 
@@ -108,7 +105,10 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                       text: "Cancel",
                       outlined: true,
                       onPressed: () {
-                        Nav.push(context, VerifyReset(email: emailController.text,));
+                        Nav.push(
+                          context,
+                          VerifyReset(email: emailController.text),
+                        );
                       },
                     ),
                   ],

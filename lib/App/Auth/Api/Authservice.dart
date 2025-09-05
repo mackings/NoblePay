@@ -4,9 +4,8 @@ import 'package:noblepay/App/widgets/constants/const.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ApiService {
-  
   final String _baseUrl = Constants.baseUrl;
-   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
 
   /// Register a new customer
   Future<Map<String, dynamic>> registerCustomer(
@@ -65,7 +64,6 @@ class ApiService {
       };
     }
   }
-
 
   /// Login a customer
   Future<Map<String, dynamic>> loginCustomer(
@@ -257,7 +255,6 @@ class ApiService {
     }
   }
 
-
   /// Verify login with OTP
   Future<Map<String, dynamic>> verifyLogin({
     String? email,
@@ -296,15 +293,26 @@ class ApiService {
 
         // ✅ Save to secure storage
         if (data != null) {
-
           await _secureStorage.write(key: "username", value: data["userName"]);
           await _secureStorage.write(key: "userId", value: data["userId"]);
           await _secureStorage.write(key: "email", value: data["email"]);
-          await _secureStorage.write(key: "phoneNumber", value: data["phoneNumber"]);
-          await _secureStorage.write(key: "accessToken", value: data["accessToken"]);
-          await _secureStorage.write(key: "refreshToken", value: data["refreshToken"]);
+          await _secureStorage.write(
+            key: "phoneNumber",
+            value: data["phoneNumber"],
+          );
+          await _secureStorage.write(
+            key: "accessToken",
+            value: data["accessToken"],
+          );
+          await _secureStorage.write(
+            key: "refreshToken",
+            value: data["refreshToken"],
+          );
           await _secureStorage.write(key: "expires", value: data["expires"]);
-          await _secureStorage.write(key: "refreshTokenExpiresAt", value: data["refreshTokenExpiresAt"]);
+          await _secureStorage.write(
+            key: "refreshTokenExpiresAt",
+            value: data["refreshTokenExpiresAt"],
+          );
         }
 
         return decoded;
@@ -341,8 +349,7 @@ class ApiService {
     }
   }
 
-
-    /// Forgot Password
+  /// Forgot Password
   Future<Map<String, dynamic>> forgotPassword(String email) async {
     final url = Uri.parse("$_baseUrl/Auth/forgot-password");
 
@@ -358,7 +365,8 @@ class ApiService {
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": "Bearer YOUR_SECRET_TOKEN", // 🔑 Replace with real token
+          "Authorization":
+              "Bearer YOUR_SECRET_TOKEN", // 🔑 Replace with real token
         },
         body: jsonEncode(payload),
       );
@@ -403,8 +411,7 @@ class ApiService {
     }
   }
 
-
-    /// Reset Password
+  /// Reset Password
   Future<Map<String, dynamic>> resetPassword({
     required String userId, // UUID in the URL
     required String passwordResetCode,
@@ -474,6 +481,4 @@ class ApiService {
       };
     }
   }
-
-
 }

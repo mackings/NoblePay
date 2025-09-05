@@ -11,9 +11,6 @@ import 'package:noblepay/App/widgets/pagewrapper.dart';
 import 'package:noblepay/App/widgets/pinfields.dart';
 import 'package:noblepay/App/widgets/text.dart';
 
-
-
-
 class Twofactor extends StatefulWidget {
   final String email;
   const Twofactor({super.key, required this.email});
@@ -28,9 +25,9 @@ class _TwofactorState extends State<Twofactor> {
 
   Future<void> _verifyOtp() async {
     if (otp.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter the OTP")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Please enter the OTP")));
       return;
     }
 
@@ -42,18 +39,16 @@ class _TwofactorState extends State<Twofactor> {
     setState(() => isLoading = false);
 
     if (result["isSuccess"] == true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Login verified ✅")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Login verified ✅")));
 
       // ✅ Close modal and go to HomePage
       Navigator.pop(context); // close bottom sheet
       Nav.pushReplacement(context, HomePage());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(result["message"] ?? "Invalid OTP"),
-        ),
+        SnackBar(content: Text(result["message"] ?? "Invalid OTP")),
       );
     }
   }
@@ -67,7 +62,10 @@ class _TwofactorState extends State<Twofactor> {
         body: PageWrapper(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 80.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 80.0,
+              ),
               child: Column(
                 children: [
                   GradientText(text: "2FA Verification", fontSize: 30),
@@ -88,10 +86,7 @@ class _TwofactorState extends State<Twofactor> {
 
                   const SizedBox(height: 110),
 
-                  CustomButton(
-                    text: "Verify",
-                    onPressed: _verifyOtp,
-                  ),
+                  CustomButton(text: "Verify", onPressed: _verifyOtp),
 
                   const SizedBox(height: 30),
 
@@ -113,7 +108,8 @@ class _TwofactorState extends State<Twofactor> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 final api = ApiService();
-                                final result = await api.resendVerificationEmail(widget.email);
+                                final result = await api
+                                    .resendVerificationEmail(widget.email);
 
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
