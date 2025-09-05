@@ -341,4 +341,139 @@ class ApiService {
     }
   }
 
+
+    /// Forgot Password
+  Future<Map<String, dynamic>> forgotPassword(String email) async {
+    final url = Uri.parse("$_baseUrl/Auth/forgot-password");
+
+    final payload = {"email": email};
+
+    try {
+      print("🔹 ForgotPassword API Call");
+      print("➡️ URL: $url");
+      print("📦 Payload: ${jsonEncode(payload)}");
+
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer YOUR_SECRET_TOKEN", // 🔑 Replace with real token
+        },
+        body: jsonEncode(payload),
+      );
+
+      print("⬅️ Status Code: ${response.statusCode}");
+      print("📩 Response Body: ${response.body}");
+
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && decoded["isSuccess"] == true) {
+        return decoded;
+      }
+
+      if (decoded["errors"] != null) {
+        final errors = decoded["errors"] as Map<String, dynamic>;
+        final errorMessages = errors.entries
+            .map((e) => "${e.key}: ${(e.value as List).join(", ")}")
+            .join("\n");
+        return {"isSuccess": false, "message": errorMessages, "data": null};
+      }
+
+      if (decoded["message"] != null) {
+        return {
+          "isSuccess": false,
+          "message": decoded["message"],
+          "data": null,
+        };
+      }
+
+      return {
+        "isSuccess": false,
+        "message": "Unexpected server error (${response.statusCode})",
+        "data": null,
+      };
+    } catch (e) {
+      print("❌ ForgotPassword failed: $e");
+      return {
+        "isSuccess": false,
+        "message": "ForgotPassword request failed: $e",
+        "data": null,
+      };
+    }
+  }
+
+
+    /// Reset Password
+  Future<Map<String, dynamic>> resetPassword({
+    required String userId, // UUID in the URL
+    required String passwordResetCode,
+    required String newPassword,
+  }) async {
+    final url = Uri.parse("$_baseUrl/Auth/reset-password/$userId");
+
+    final payload = {
+      "passwordResetCode": passwordResetCode,
+      "newPassword": newPassword,
+    };
+
+    try {
+      print("🔹 ResetPassword API Call");
+      print("➡️ URL: $url");
+      print("📦 Payload: ${jsonEncode(payload)}");
+
+      // ✅ Retrieve token from secure storage
+      final token = await _secureStorage.read(key: "accessToken");
+
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          if (token != null) "Authorization": "Bearer $token",
+        },
+        body: jsonEncode(payload),
+      );
+
+      print("⬅️ Status Code: ${response.statusCode}");
+      print("📩 Response Body: ${response.body}");
+
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && decoded["isSuccess"] == true) {
+        return decoded;
+      }
+
+      if (decoded["errors"] != null) {
+        final errors = decoded["errors"] as Map<String, dynamic>;
+        final errorMessages = errors.entries
+            .map((e) => "${e.key}: ${(e.value as List).join(", ")}")
+            .join("\n");
+        return {"isSuccess": false, "message": errorMessages, "data": null};
+      }
+
+      if (decoded["message"] != null) {
+        return {
+          "isSuccess": false,
+          "message": decoded["message"],
+          "data": null,
+        };
+      }
+
+      return {
+        "isSuccess": false,
+        "message": "Unexpected server error (${response.statusCode})",
+        "data": null,
+      };
+    } catch (e) {
+      print("❌ ResetPassword failed: $e");
+      return {
+        "isSuccess": false,
+        "message": "ResetPassword request failed: $e",
+        "data": null,
+      };
+    }
+  }
+
+
 }
