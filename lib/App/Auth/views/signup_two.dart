@@ -85,13 +85,13 @@ class _Signup_twoState extends State<Signup_two> {
           : "",
       "birthDate": widget.dob,
       "address": {
-        "street_address": streetController.text,
+        "streetaddress": streetController.text,
         "city": cityController.text,
         "state": "NY",
-        "postal_code": postalController.text,
+        "postalcode": postalController.text,
         "country": countryController.text,
       },
-      "deviceInfo": deviceInfo, // ✅ real device info
+      "deviceInfo": deviceInfo, 
       "marketingPreferences": {
         "email_offers": true,
         "sms_offers": false,
