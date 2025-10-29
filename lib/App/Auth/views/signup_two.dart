@@ -74,30 +74,29 @@ class _Signup_twoState extends State<Signup_two> {
     // ✅ get device info
     final deviceInfo = await DeviceHelper.getDeviceInfo();
 
-    final payload = {
-      "email": emailController.text,
-      "phoneNumber": phoneController.text,
-      "userName": usernameController.text,
-      "password": passwordController.text,
-      "firstName": widget.fullname.split(" ").first,
-      "lastName": widget.fullname.split(" ").length > 1
-          ? widget.fullname.split(" ").last
-          : "",
-      "birthDate": widget.dob,
-      "address": {
-        "streetaddress": streetController.text,
-        "city": cityController.text,
-        "state": "NY",
-        "postalcode": postalController.text,
-        "country": countryController.text,
-      },
-      "deviceInfo": deviceInfo, 
-      "marketingPreferences": {
-        "email_offers": true,
-        "sms_offers": false,
-        "consent_date": DateTime.now().toIso8601String(),
-      },
-    };
+final payload = {
+  "email": emailController.text,
+  "phoneNumber": phoneController.text,
+  "userName": usernameController.text,
+  "password": passwordController.text,
+  "firstName": widget.fullname.split(" ").first,
+  "middleName": null,
+  "lastName": widget.fullname.split(" ").length > 1
+      ? widget.fullname.split(" ").last
+      : "",
+  "birthDate": widget.dob,
+  "streetAddress": streetController.text,
+  "streetAddress2": null,
+  "city": cityController.text,
+  "state": streetController.text,
+  "postalCode": postalController.text,
+  "country": countryController.text,
+  "deviceId": deviceInfo["deviceid"],
+  "deviceType": deviceInfo["devicetype"],
+  "deviceOsVersion": deviceInfo["deviceosversion"],
+};
+
+
 
     final result = await api.registerCustomer(payload);
 
