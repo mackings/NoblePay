@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
+
+
 class Signup_two extends StatefulWidget {
   final String fullname;
   final String dob;
@@ -23,6 +26,7 @@ class Signup_two extends StatefulWidget {
 }
 
 class _Signup_twoState extends State<Signup_two> {
+  
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController phoneController;
@@ -73,6 +77,7 @@ class _Signup_twoState extends State<Signup_two> {
 
     // ✅ get device info
     final deviceInfo = await DeviceHelper.getDeviceInfo();
+
 
 final payload = {
   "email": emailController.text,
