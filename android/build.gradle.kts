@@ -11,6 +11,12 @@ val newBuildDir: Directory =
         .get()
 rootProject.layout.buildDirectory.value(newBuildDir)
 
+// Source - https://stackoverflow.com/a
+// Posted by taotao
+// Retrieved 2025-12-01, License - CC BY-SA 4.0
+
+
+
 subprojects {
     val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
     project.layout.buildDirectory.value(newSubprojectBuildDir)
@@ -22,3 +28,5 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+

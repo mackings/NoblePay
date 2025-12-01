@@ -26,7 +26,7 @@ class Signup_two extends StatefulWidget {
 }
 
 class _Signup_twoState extends State<Signup_two> {
-  
+
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController phoneController;
@@ -157,11 +157,13 @@ final payload = {
                   ),
                   const SizedBox(height: 40),
                   GradientText(text: "Sign up", fontSize: 30),
+
                   CustomText(
                     title: "Please enter your details to continue",
                     fontSize: 18,
                     fontWeight: FontWeight.w300,
                   ),
+
                   const SizedBox(height: 30),
 
                   CustomTextFormField(
@@ -169,7 +171,9 @@ final payload = {
                     hintText: "Mac kingsley",
                     controller: usernameController,
                   ),
+
                   const SizedBox(height: 10),
+                  
                   CustomTextFormField(
                     title: "Email",
                     hintText: "example@email.com",
