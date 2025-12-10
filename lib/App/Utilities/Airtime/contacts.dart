@@ -132,6 +132,138 @@ class _ContactsScreenState extends State<ContactsScreen> {
     );
   }
 
+  Future<void> _showAddContactDialog() async {
+    final nameController = TextEditingController();
+    final phoneController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Add New Contact'),
+        content: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  labelText: 'Full Name',
+                  hintText: 'Enter contact name',
+                  prefixIcon: const Icon(Icons.person),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter a name';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                  hintText: 'Enter phone number',
+                  prefixIcon: const Icon(Icons.phone),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter a phone number';
+                  }
+                  // Basic phone validation (you can make this more strict)
+                  if (value.replaceAll(RegExp(r'[^0-9+]'), '').length < 10) {
+                    return 'Please enter a valid phone number';
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              if (formKey.currentState!.validate()) {
+                Navigator.pop(context);
+                await _addContact(
+                  nameController.text.trim(),
+                  phoneController.text.trim(),
+                );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _addContact(String name, String phone) async {
+    try {
+      // Show loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(color: Colors.red),
+        ),
+      );
+
+      // Create new contact
+      final newContact = Contact()
+        ..name.first = name.split(' ').first
+        ..name.last = name.split(' ').length > 1 
+            ? name.split(' ').sublist(1).join(' ') 
+            : ''
+        ..phones = [Phone(phone)];
+
+      // Insert contact to device
+      await newContact.insert();
+
+      // Close loading dialog
+      Navigator.pop(context);
+
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$name added successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
+
+      // Reload contacts to show the new one
+      await _loadContacts();
+    } catch (e) {
+      // Close loading dialog
+      Navigator.pop(context);
+
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to add contact: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final groupedContacts = _groupContactsByInitial();
@@ -185,12 +317,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: InkWell(
-              onTap: () {
-                // TODO: Implement add contact functionality
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Add contact feature")),
-                );
-              },
+              onTap: _showAddContactDialog,
               child: Row(
                 children: [
                   Container(
